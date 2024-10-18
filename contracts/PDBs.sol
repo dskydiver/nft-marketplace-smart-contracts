@@ -43,6 +43,7 @@ contract PDBs is ERC721Enumerable, Pausable, Ownable {
     string public baseURI;
 
     event UpdatedRoyaltyFee(uint256 _royaltyFee);
+    event UpdatedBaseURI(string _baseURI);
 
     constructor(
         string memory _name,
@@ -98,6 +99,11 @@ contract PDBs is ERC721Enumerable, Pausable, Ownable {
         for (uint256 i = 1; i <= amount; i++) {
             _safeMint(to, supply + i);
         }
+    }
+
+    function updateBaseURI(string memory baseURI_) external onlyOwner {
+        baseURI = baseURI_;
+        emit UpdatedBaseURI(baseURI_);
     }
 
     function tokenURI(
